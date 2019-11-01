@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<HTML lang="en">
+	<HEAD>
+	<meta name="Description" content="Vpower EVSE charger interface">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#33DFFF"/>
+	<link rel="apple-touch-icon" sizes="192x192" href="icon.png">
+	<link rel="apple-touch-icon" href="icon.png">
+	<link rel="manifest" href="/manifest.json">
+	
+	<TITLE>VPower</TITLE>
+	</HEAD>
+	<BODY class="body" onload="loaded()">
+	<script src="ble.js"></script>
+	<div style="border-radius: 15px; padding: 10px;  max-width: 340px; background: #e0e0e0;">	
+	<div style="border-radius: 15px; border: 2px solid #33DFFF; padding: 10px;  max-width: 340px; background: #FFFFFF;">
+	
+	
+	<div align="center"><h3 style="display: inline-block" id="status">Not connected</h3> <button type="button" id="ButtonConnect" onclick="ble_connect()" style="display: inline-block">Connect</button><button type="button" id="ButtonStopCharging" onclick="stop_charging()" style="display: none;">Stop Charging</button></div>
+	<hr style="display: block; height: 1px; border: 0; border-top: 1px solid #33DFFF;margin: 1em 0; padding: 0;"> 
+	<h3>Energy</h3>
+	<div id="EnergySess">Session:</div>
+	<div id="EnergyTot">Total:</div>
+	
+	<hr style="display: block; height: 1px; border: 0; border-top: 1px solid #33DFFF;margin: 1em 0; padding: 0;"> 
+	<h3>Current setting</h3>
+	<input type="radio" onchange="update_current()" name="currentSettingMemory" id="retain" value="0"> <label for="retain">Always boot at set current</label><br>
+	<input type="radio" onchange="update_current()" name="currentSettingMemory" checked="checked" id="forget" value="1"> <label for="forget">Always boot at 6A</label><br>
+	<input type="radio" onchange="update_current()" name="currentSetting" checked="checked" id="6A" value="6"> <label for="6A">6A</label><br>
+	<input type="radio" onchange="update_current()" name="currentSetting" id="10A"value="10"> <label for="10A">10A</label><br>
+	<input type="radio" onchange="update_current()" name="currentSetting" id="13A"value="13"> <label for="13A">13A</label><br>
+	<input type="radio" onchange="update_current()" name="currentSetting" id="16A"value="16"> <label for="16A">16A</label><br>
+	
+	<div id="Advanced" style="display: none;">
+	<hr style="display: block; height: 1px; border: 0; border-top: 1px solid #33DFFF;margin: 1em 0; padding: 0;"> 
+	<h3>Raw values</h3>
+	<div id="L1">L1:</div>
+	<div id="L2">L2:</div>
+	<div id="L3">L3:</div>
+	<div id="N">N:</div>
+	<br>
+	<div id="State">State</div>
+	</div>
+	</div>	
+	<div align="center">
+	<a href="about.html">About</a> | <a href="mailto:v.passe@gmail.com?subject=Regarding VPower EVSE">Contact</a> | <button id="ButtonAdvanced" type="button" onclick="if(document.getElementById('Advanced').style.display=='none'){document.getElementById('Advanced').style.display='block';document.getElementById('ButtonAdvanced').innerHTML='Hide Advanced'}else{document.getElementById('Advanced').style.display='none';document.getElementById('ButtonAdvanced').innerHTML='Show Advanced'}">Show Advanced</button>
+	</div>
+	</div>
+	</BODY>
+</HTML>
