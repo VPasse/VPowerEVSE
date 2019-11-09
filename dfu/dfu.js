@@ -9,7 +9,7 @@ function getFile(url) {
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open('get', url, true);
-        xhr.responseType = 'document';
+        xhr.responseType = 'text';
         xhr.onload = function () {
             var status = xhr.status;
             if (status == 200) {
