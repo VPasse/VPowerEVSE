@@ -1,5 +1,6 @@
 
-
+import './package';
+import './secure-dfu';
 
 function dfu()
 {
