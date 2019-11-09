@@ -1,7 +1,8 @@
 
 function dfu()
 {
-	setPackage(getFile("FW/app_dfu_package.zip"));
+	new file= await getFile("FW/app_dfu_package.zip")
+	setPackage();
 
 }
 
