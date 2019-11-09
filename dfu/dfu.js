@@ -4,22 +4,16 @@ async function dfu()
 	const myBlob = await response.blob();
 	
 	setPackage(myBlob);
-
+	selectDevice();
 }
 
   function setStatus(state) {
-            labelEl.textContent = state;
         }
 
         function setTransfer(state) {
             if (!state) {
-                statusEl.style.visibility = "hidden";
                 return;
             }
-            selectEl.style.visibility = "hidden";
-            statusEl.style.visibility = "visible";
-            barEl.style.width = state.currentBytes / state.totalBytes * 100 + '%';
-            transferEl.textContent = `${state.currentBytes}/${state.totalBytes} ${state.object} bytes written`;
         }
 
         // Load a firmware package
@@ -30,11 +24,8 @@ async function dfu()
             package.load()
             .then(() => {
                 setStatus(`Firmware package: ${file.name}`);
-                selectEl.style.visibility = "visible";
             })
             .catch(error => {
-                selectEl.style.visibility = "hidden";
-                statusEl.style.visibility = "hidden";
                 setStatus(error);
             });
         }
@@ -61,7 +52,6 @@ async function dfu()
                 return update(dfu, device);
             })
             .catch(error => {
-                statusEl.style.visibility = "hidden";
                 setStatus(error);
             });
         }
@@ -88,10 +78,8 @@ async function dfu()
             .then(() => {
                 setStatus("Update complete!");
                 setTransfer();
-                fileEl.value = "";
             })
             .catch(error => {
-                statusEl.style.visibility = "hidden";
                 setStatus(error);
             });
         }
