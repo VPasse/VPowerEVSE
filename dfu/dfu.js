@@ -1,7 +1,4 @@
 
-import './package';
-import './secure-dfu';
-
 function dfu()
 {
 	setPackage(getFile("FW/app_dfu_package.zip"));
