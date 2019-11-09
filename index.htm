@@ -12,6 +12,7 @@
 	</HEAD>
 	<BODY class="body" onload="loaded()">
 	<script src="ble.js"></script>
+	<script src="dfu.js"></script>
 	<div style="border-radius: 15px; padding: 10px;  max-width: 340px; background: #e0e0e0;">	
 	<div style="border-radius: 15px; border: 2px solid #33DFFF; padding: 10px;  max-width: 340px; background: #FFFFFF;">
 	
@@ -31,6 +32,14 @@
 	<input type="radio" onchange="update_current()" name="currentSetting" id="13A"value="13"> <label for="13A">13A</label><br>
 	<input type="radio" onchange="update_current()" name="currentSetting" id="16A"value="16"> <label for="16A">16A</label><br>
 	
+	<hr style="display: block; height: 1px; border: 0; border-top: 1px solid #33DFFF;margin: 1em 0; padding: 0;"> 
+	<h3>Load Sharing</h3>
+	<input type="number" name="LoadSharingChannel" min="0" max="8" id="LoadSharingChannel" value="0"> <label for="LoadSharingChannel">Load sharing channel, 0=disable</label><br>
+	<div>Detected other devices: 0</div>
+	<input type="number" name="LoadSharingNodes" min="1" max="5" id="LoadSharingNodes" value="1"> <label for="LoadSharingNodes">Number of devices sharing power</label><br>
+	<input type="number" name="LoadSharingMaxCurrent" min="6" max="128" id="LoadSharingMaxCurrent" value="16"> <label for="LoadSharingMaxCurrent">Max total current to share</label><br>
+
+	
 	<div id="Advanced" style="display: none;">
 	<hr style="display: block; height: 1px; border: 0; border-top: 1px solid #33DFFF;margin: 1em 0; padding: 0;"> 
 	<h3>Raw values</h3>
@@ -43,7 +52,11 @@
 	</div>
 	</div>	
 	<div align="center">
-	<a href="about.html">About</a> | <a href="mailto:v.passe@gmail.com?subject=Regarding VPower EVSE">Contact</a> | <button id="ButtonAdvanced" type="button" onclick="if(document.getElementById('Advanced').style.display=='none'){document.getElementById('Advanced').style.display='block';document.getElementById('ButtonAdvanced').innerHTML='Hide Advanced'}else{document.getElementById('Advanced').style.display='none';document.getElementById('ButtonAdvanced').innerHTML='Show Advanced'}">Show Advanced</button>
+	<a href="about.html">About</a> |
+	<a href="mailto:v.passe@gmail.com?subject=Regarding VPower EVSE">Contact</a> |
+	<button id="ButtonAdvanced" type="button" onclick="if(document.getElementById('Advanced').style.display=='none'){document.getElementById('Advanced').style.display='block';document.getElementById('ButtonAdvanced').innerHTML='Hide Advanced'}else{document.getElementById('Advanced').style.display='none';document.getElementById('ButtonAdvanced').innerHTML='Show Advanced'}">Show Advanced</button> | 
+	<button type="button" id="ButtonLock" onclick="lock()" style="display: inline-block">Lock config</button> | 
+	<button type="button" id="ButtonDfu" onclick="dfu()" style="display: inline-block">DFU</button>
 	</div>
 	</div>
 	</BODY>
