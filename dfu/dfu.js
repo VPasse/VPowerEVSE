@@ -1,7 +1,7 @@
 async function dfu()
 {
 	const file= await getFile("FW/app_dfu_package.zip")
-	//setPackage(file);
+	setPackage(file);
 
 }
 
