@@ -7,8 +7,6 @@ async function dfu()
 
 }
 
-}
-
   function setStatus(state) {
             labelEl.textContent = state;
         }
