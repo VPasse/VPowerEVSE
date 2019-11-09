@@ -1,12 +1,11 @@
-
-function dfu()
+async function dfu()
 {
-	new file= await getFile("FW/app_dfu_package.zip")
-	setPackage();
+	const file= await getFile("FW/app_dfu_package.zip")
+	//setPackage(file);
 
 }
 
-function getFile(url) {
+function  getFile(url) {
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open('get', url, true);
@@ -14,7 +13,7 @@ function getFile(url) {
         xhr.onload = function () {
             var status = xhr.status;
             if (status == 200) {
-                resolve(xhr.responseText);
+                resolve(xhr.response);
             } else {
                 reject(status);
             }
