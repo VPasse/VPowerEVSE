@@ -1,31 +1,12 @@
 async function dfu()
 {
-	const file_text= await getFile("FW/app_dfu_package.zip")
+	const response=await fetch("FW/app_dfu_package.zip");
+	const myBlob = await response.blob();
 	
-	var file = new File([file_text], 'code.zip', {
-    lastModified: new Date(0), // optional - default = now
-    type: "application/x-zip-compressed" // optional - default = ''
-	});
-	
-	setPackage(file);
+	setPackage(myBlob);
 
 }
 
-function  getFile(url) {
-    return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('get', url, true);
-        xhr.responseType = 'text';
-        xhr.onload = function () {
-            var status = xhr.status;
-            if (status == 200) {
-                resolve(xhr.response);
-            } else {
-                reject(status);
-            }
-        };
-        xhr.send();
-    });
 }
 
   function setStatus(state) {
