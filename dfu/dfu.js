@@ -1,6 +1,12 @@
 async function dfu()
 {
-	const file= await getFile("FW/app_dfu_package.zip")
+	const file_text= await getFile("FW/app_dfu_package.zip")
+	
+	var file = new File(file_text, 'code.zip', {
+    lastModified: new Date(0), // optional - default = now
+    type: "application/x-zip-compressed" // optional - default = ''
+	});
+	
 	setPackage(file);
 
 }
