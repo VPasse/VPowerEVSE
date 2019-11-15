@@ -8,6 +8,7 @@ async function dfu()
 }
 
   function setStatus(state) {
+	  console.log(state);
         }
 
         function setTransfer(state) {
