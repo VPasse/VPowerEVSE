@@ -1,4 +1,4 @@
-async function dfu() {
+async function dfu_from_app() {
 	if (charDfu != null) {
 
 		let buffer = new ArrayBuffer(1);
@@ -6,12 +6,17 @@ async function dfu() {
 		uint8View[0] = 1;
 		await charDfu.writeValue(uint8View);
 
+		await dfu();
+	}
+}
+
+async function dfu()
+{
 		const response = await fetch("FW/app_dfu_package.zip");
 		const myBlob = await response.blob();
 
 		setPackage(myBlob);
 		selectDevice();
-	}
 }
 
 function setStatus(state) {

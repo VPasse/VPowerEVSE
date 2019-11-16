@@ -64,12 +64,19 @@ async function ble_connect() {
 			filters: [{
 					name: 'VPower'
 				}, {
+					name: 'VPDFU'
+				},{
 					services: [evseServiceUUID, evseDFUServiceUUID]
 				}
 			],
 			optionalServices: [evseServiceUUID, evseDFUServiceUUID]
 		};
 		bluetoothDevice = await navigator.bluetooth.requestDevice(options);
+		if(bluetoothDevice.name=='VPDFU')
+		{
+			await dfu();
+			return;
+		}
 		bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
 		const server = await bluetoothDevice.gatt.connect();
 		const service = await server.getPrimaryService(evseServiceUUID);
