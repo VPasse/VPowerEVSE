@@ -19,8 +19,9 @@ function setStatus(state) {
 }
 
 function setTransfer(state) {
-	if (!state) {
-		return;
+	if (state) {
+		document.getElementById('status').innerHTML = state.currentBytes / state.totalBytes * 100 + '%';
+		document.getElementById('ButtonConnect').style.display = 'none';
 	}
 }
 
@@ -52,9 +53,12 @@ function selectDevice() {
 		setTransfer(event);
 	});
 
-	filters = [ { name: 'VPDFU' } ];
-	
-	dfu.requestDevice(true,filters)
+	filters = [{
+			name: 'VPDFU'
+		}
+	];
+
+	dfu.requestDevice(true, filters)
 	.then(device => {
 		if (!device) {
 			setStatus("DFU mode set, select device again");
@@ -90,6 +94,7 @@ function update(dfu, device) {
 	.then(() => {
 		setStatus("Update complete!");
 		setTransfer();
+		disconnected();
 	})
 	.catch (error => {
 		setStatus(error);
