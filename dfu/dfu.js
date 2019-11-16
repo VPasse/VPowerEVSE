@@ -25,7 +25,7 @@ function setStatus(state) {
 
 function setTransfer(state) {
 	if (state) {
-		document.getElementById('status').innerHTML = state.currentBytes / state.totalBytes * 100 + '%';
+		document.getElementById('status').innerHTML = Math.round(state.currentBytes / state.totalBytes * 100) + '%';
 		document.getElementById('ButtonConnect').style.display = 'none';
 	}
 }
