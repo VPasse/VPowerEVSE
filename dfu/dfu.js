@@ -52,7 +52,9 @@ function selectDevice() {
 		setTransfer(event);
 	});
 
-	dfu.requestDevice(true)
+	filters = [ { name: 'VPDFU' } ];
+	
+	dfu.requestDevice(true,filters)
 	.then(device => {
 		if (!device) {
 			setStatus("DFU mode set, select device again");
