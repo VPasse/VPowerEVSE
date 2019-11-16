@@ -42,11 +42,18 @@ function loaded() {
 function connected() {
 	document.getElementById('status').innerHTML = 'Connected';
 	document.getElementById('ButtonConnect').style.display = 'none';
+	document.getElementById('energy').style.display = '';
+	document.getElementById('current_settings').style.display = '';
+	document.getElementById('load_sharing').style.display = '';
 }
 
 function disconnected() {
 	document.getElementById('status').innerHTML = 'Not connected';
 	document.getElementById('ButtonConnect').style.display = 'inline-block';
+	document.getElementById('energy').style.display = 'none';
+	document.getElementById('current_settings').style.display = 'none';
+	document.getElementById('load_sharing').style.display = 'none';
+	
 }
 
 function onDisconnected() {
