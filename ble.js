@@ -157,16 +157,24 @@ function handleNotifications(event) {
 	case evseCcharUUID:
 		maxCurrent = value.getUint8(0, true);
 		alwaysBootAt6A = value.getUint8(1, true);
+		document.getElementById('LoadSharingChannel').value = value.getUint8(2, true);
+		document.getElementById('LoadSharingNodes').value = value.getUint8(3, true);
+		document.getElementById('LoadSharingMaxCurrent').value = value.getUint8(4, true);
+		document.getElementById('LoadSharingFoundNodes').innerHTML = value.getUint8(5, true);
 		break;
 	}
 	ble_refresh_data();
 }
 
 async function update_current() {
-	let buffer = new ArrayBuffer(2);
+	let buffer = new ArrayBuffer(6);
 	let uint8View = new Uint8Array(buffer);
 	uint8View[0] = document.querySelector('input[name="currentSetting"]:checked').value;
 	uint8View[1] = document.querySelector('input[name="currentSettingMemory"]:checked').value;
+	uint8View[2] = document.querySelector('input[name="LoadSharingChannel"]').value;
+	uint8View[3] = document.querySelector('input[name="LoadSharingNodes"]').value;
+	uint8View[4] = document.querySelector('input[name="LoadSharingMaxCurrent"]').value;
+	uint8View[5] = 0;
 	await charC.writeValue(uint8View);
 }
 
