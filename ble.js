@@ -45,6 +45,9 @@ function connected() {
 	document.getElementById('energy').style.display = '';
 	document.getElementById('current_settings').style.display = '';
 	document.getElementById('load_sharing').style.display = '';
+	document.getElementById('advanced').style.display = 'inline-block';
+	document.getElementById('lock').style.display = 'inline-block';
+	document.getElementById('dfu').style.display = 'inline-block';
 }
 
 function disconnected() {
@@ -53,7 +56,9 @@ function disconnected() {
 	document.getElementById('energy').style.display = 'none';
 	document.getElementById('current_settings').style.display = 'none';
 	document.getElementById('load_sharing').style.display = 'none';
-	
+	document.getElementById('advanced').style.display = 'none';
+	document.getElementById('lock').style.display = 'none';
+	document.getElementById('dfu').style.display = 'none';
 }
 
 function onDisconnected() {
@@ -72,15 +77,14 @@ async function ble_connect() {
 					name: 'VPower'
 				}, {
 					name: 'VPDFU'
-				},{
+				}, {
 					services: [evseServiceUUID, evseDFUServiceUUID]
 				}
 			],
 			optionalServices: [evseServiceUUID, evseDFUServiceUUID]
 		};
 		bluetoothDevice = await navigator.bluetooth.requestDevice(options);
-		if(bluetoothDevice.name=='VPDFU')
-		{
+		if (bluetoothDevice.name == 'VPDFU') {
 			await dfu();
 			return;
 		}
@@ -92,7 +96,6 @@ async function ble_connect() {
 		charDfu = await serviceDfu.getCharacteristic(evseDFUCharUUID);
 		await charDfu.startNotifications()
 		charDfu.addEventListener('characteristicvaluechanged', handleNotifications);
-
 
 		const charU = await service.getCharacteristic(evseUcharUUID);
 		await charU.startNotifications()
@@ -175,46 +178,45 @@ async function stop_charging() {
 }
 
 function ble_refresh_data() {
-	document.getElementById("L1").innerHTML = "L1: " + voltages[0].toFixed(0).toString() + "V, " + currents[0].toFixed(1).toString() + "A, " + (power[0] / 1e3).toFixed(1).toString() + "kW"
-		document.getElementById("L2").innerHTML = "L2: " + voltages[1].toFixed(0).toString() + "V, " + currents[1].toFixed(1).toString() + "A, " + (power[1] / 1e3).toFixed(1).toString() + "kW"
-		document.getElementById("L3").innerHTML = "L3: " + voltages[2].toFixed(0).toString() + "V, " + currents[2].toFixed(1).toString() + "A, " + (power[2] / 1e3).toFixed(1).toString() + "kW"
-		document.getElementById("N").innerHTML = "N: " + voltages[3].toFixed(0).toString() + "V"
-		document.getElementById("EnergySess").innerHTML = "Session: " + (energySession / 1e3).toFixed(1).toString() + "kWh"
-		document.getElementById("EnergyTot").innerHTML = "Total: " + (energyTotal / 1e3).toFixed(1).toString() + "kWh"
-		document.getElementById("State").innerHTML = stateNames[state]
-		if (state == 4) //charging
-		{
-			document.getElementById('ButtonStopCharging').style.display = 'inline-block';
-		} else {
-			document.getElementById('ButtonStopCharging').style.display = 'none';
-		}
+	document.getElementById("L1").innerHTML = "L1: " + voltages[0].toFixed(0).toString() + "V, " + currents[0].toFixed(1).toString() + "A, " + (power[0] / 1e3).toFixed(1).toString() + "kW";
+	document.getElementById("L2").innerHTML = "L2: " + voltages[1].toFixed(0).toString() + "V, " + currents[1].toFixed(1).toString() + "A, " + (power[1] / 1e3).toFixed(1).toString() + "kW";
+	document.getElementById("L3").innerHTML = "L3: " + voltages[2].toFixed(0).toString() + "V, " + currents[2].toFixed(1).toString() + "A, " + (power[2] / 1e3).toFixed(1).toString() + "kW";
+	document.getElementById("N").innerHTML = "N: " + voltages[3].toFixed(0).toString() + "V";
+	document.getElementById("EnergySess").innerHTML = "Session: " + (energySession / 1e3).toFixed(1).toString() + "kWh";
+	document.getElementById("EnergyTot").innerHTML = "Total: " + (energyTotal / 1e3).toFixed(1).toString() + "kWh";
+	document.getElementById("State").innerHTML = stateNames[state];
+	if (state == 4) //charging
+	{
+		document.getElementById('ButtonStopCharging').style.display = 'inline-block';
+	} else {
+		document.getElementById('ButtonStopCharging').style.display = 'none';
+	}
 
-		if (maxCurrent == 6) {
-			document.getElementById("6A").checked = true;
-		} else {
-			document.getElementById("6A").checked = false;
-		}
-		if (maxCurrent == 10) {
-			document.getElementById("10A").checked = true;
-		} else {
-			document.getElementById("10A").checked = false;
-		}
-		if (maxCurrent == 13) {
-			document.getElementById("13A").checked = true;
-		} else {
-			document.getElementById("13A").checked = false;
-		}
-		if (maxCurrent == 16) {
-			document.getElementById("16A").checked = true;
-		} else {
-			document.getElementById("16A").checked = false;
-		}
-		if (alwaysBootAt6A == 1) {
-			document.getElementById("forget").checked = true;
-			document.getElementById("retain").checked = false;
-		} else {
-			document.getElementById("forget").checked = false;
-			document.getElementById("retain").checked = true;
-		}
-
+	if (maxCurrent == 6) {
+		document.getElementById("6A").checked = true;
+	} else {
+		document.getElementById("6A").checked = false;
+	}
+	if (maxCurrent == 10) {
+		document.getElementById("10A").checked = true;
+	} else {
+		document.getElementById("10A").checked = false;
+	}
+	if (maxCurrent == 13) {
+		document.getElementById("13A").checked = true;
+	} else {
+		document.getElementById("13A").checked = false;
+	}
+	if (maxCurrent == 16) {
+		document.getElementById("16A").checked = true;
+	} else {
+		document.getElementById("16A").checked = false;
+	}
+	if (alwaysBootAt6A == 1) {
+		document.getElementById("forget").checked = true;
+		document.getElementById("retain").checked = false;
+	} else {
+		document.getElementById("forget").checked = false;
+		document.getElementById("retain").checked = true;
+	}
 }

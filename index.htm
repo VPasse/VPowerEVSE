@@ -64,10 +64,10 @@
 	</div>	
 	<div align="center">
 	<a href="about.html">About</a> |
-	<a href="mailto:v.passe@gmail.com?subject=Regarding VPower EVSE">Contact</a> |
-	<button id="ButtonAdvanced" type="button" onclick="if(document.getElementById('Advanced').style.display=='none'){document.getElementById('Advanced').style.display='block';document.getElementById('ButtonAdvanced').innerHTML='Hide Advanced'}else{document.getElementById('Advanced').style.display='none';document.getElementById('ButtonAdvanced').innerHTML='Show Advanced'}">Show Advanced</button> | 
-	<button type="button" id="ButtonLock" onclick="lock()" style="display: inline-block">Lock config</button> | 
-	<button type="button" id="ButtonDfu" onclick="dfu_from_app()" style="display: inline-block">DFU</button>
+	<a href="mailto:v.passe@gmail.com?subject=Regarding VPower EVSE">Contact</a>
+	<div id="advanced" style="display: none"> | <button id="ButtonAdvanced" type="button" onclick="if(document.getElementById('Advanced').style.display=='none'){document.getElementById('Advanced').style.display='block';document.getElementById('ButtonAdvanced').innerHTML='Hide Advanced'}else{document.getElementById('Advanced').style.display='none';document.getElementById('ButtonAdvanced').innerHTML='Show Advanced'}">Show Advanced</button></div>
+	<div id="lock" style="display: none"> | <button type="button" id="ButtonLock" onclick="lock()" style="display: inline-block">Lock config</button></div>
+	<div id="dfu" style="display: none"> | <button type="button" id="ButtonDfu" onclick="dfu_from_app()" style="display: inline-block">DFU</button></div>
 	</div>
 	</div>
 	</BODY>
